@@ -8,6 +8,9 @@ use App\Controller\PokeAPI;
 
 $request = new PokeAPI();
 
-$pokemon = $request->fetchPokemon('ditto');
+//$pokemonInfo = $request->fetchPokemonName('ditto');
+//$pokemonInfo = $request->fetchPokemonId(6);
 
-var_dump($pokemon);
+$pokemonInfo = $request->fetchPokemon(5, 0);
+
+var_dump($pokemonInfo);
