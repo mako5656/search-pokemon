@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+require_once 'vendor/autoload.php';
+
+use App\Controller\PokeAPI;
+
+$request = new PokeAPI();
+
+$pokemon = $request->fetchPokemon('ditto');
+
+var_dump($pokemon);
