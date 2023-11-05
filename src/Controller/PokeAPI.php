@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\DTO\PokeAPI\NamedAPIResourceList;
+use App\DTO\PokeAPI\Pokemon;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PokeAPI extends AbstractController
@@ -44,15 +44,32 @@ class PokeAPI extends AbstractController
         return $namedAPIResourceList;
     }
 
-    public function fetchPokemonName(string $name)
+    public function fetchPokemonName(string $name): array
     {
-        try {
-            $response = $this->client->request('GET', 'pokemon/' . $name);
-        } catch (GuzzleException $e) {
-            return $e->getMessage();
-        }
+        $response = $this->client->request('GET', 'pokemon/' . $name);
+        $responseJson = json_decode($response->getBody()->getContents(), true);
 
-        return json_decode($response->getBody()->getContents(), true)['weight'];
+        $pokemon = new Pokemon;
+        $pokemon->setId($responseJson['id']);
+        $pokemon->setName($responseJson['name']);
+        $pokemon->setBaseExperience($responseJson['base_experience']);
+        $pokemon->setHeight($responseJson['height']);
+        $pokemon->setIsDefault($responseJson['is_default']);
+        $pokemon->setOrder($responseJson['order']);
+        $pokemon->setWeight($responseJson['weight']);
+        $pokemon->setAbilities($responseJson['abilities']);
+        $pokemon->setForms($responseJson['forms']);
+        $pokemon->setGameIndices($responseJson['game_indices']);
+        $pokemon->setHeldItems($responseJson['held_items']);
+        $pokemon->setLocationAreaEncounters($responseJson['location_area_encounters']);
+        $pokemon->setMoves($responseJson['moves']);
+        $pokemon->setPostTypes($responseJson['past_types']);
+        $pokemon->setSprites($responseJson['sprites']);
+        $pokemon->setSpecies($responseJson['species']);
+        $pokemon->setStats($responseJson['stats']);
+        $pokemon->setTypes($responseJson['types']);
+
+        return $pokemon->jsonSerialize();
     }
 
     public function fetchPokemonId(int $id): array

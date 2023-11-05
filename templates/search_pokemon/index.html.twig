@@ -7,5 +7,9 @@
     {{ form_row(form.submit) }}
     {{ form_end(form) }}
 
-    {{ posts }}
+    {% if posts|length > 0  %}
+        ・名前：{{ posts.name }}<br>
+        ・高さ：{{ posts.height }}<br>
+        ・重さ{{ posts.weight }}<br>
+    {% endif %}
 {% endblock %}

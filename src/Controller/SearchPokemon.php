@@ -12,6 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchPokemon extends AbstractController
 {
+    public function __construct(
+        private readonly PokeAPI $pokeApi,
+    ){
+    }
+
     #[Route('/search_pokemon', name: 'search_pokemon')]
     public function index(Request $request): Response
     {
@@ -20,15 +25,14 @@ class SearchPokemon extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $pokeApi = new PokeAPI();
-            $pokemon = $pokeApi->fetchPokemonName($data['pokemonName']);
+            $pokemon = $this->pokeApi->fetchPokemonName($data['pokemonName']);
 
             $this->addFlash('success', '検索成功');
         }
 
         return $this->render('search_pokemon/index.html.twig', [
             'form' => $form->createView(),
-            'posts' => $pokemon ?? null
+            'posts' => $pokemon ?? [],
         ]);
     }
 }
