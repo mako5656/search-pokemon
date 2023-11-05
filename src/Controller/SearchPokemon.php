@@ -14,6 +14,7 @@ class SearchPokemon extends AbstractController
 {
     public function __construct(
         private readonly PokeAPI $pokeApi,
+        private readonly GetImagePokemon $getImagePokemon,
     ){
     }
 
@@ -26,6 +27,7 @@ class SearchPokemon extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $pokemon = $this->pokeApi->fetchPokemonName($data['pokemonName']);
+            $pokemonImage = $this->getImagePokemon->getImagePokemon($pokemon);
 
             $this->addFlash('success', '検索成功');
         }
@@ -33,6 +35,7 @@ class SearchPokemon extends AbstractController
         return $this->render('search_pokemon/index.html.twig', [
             'form' => $form->createView(),
             'posts' => $pokemon ?? [],
+            'image' => $pokemonImage ?? '',
         ]);
     }
 }
