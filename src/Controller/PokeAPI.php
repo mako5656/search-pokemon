@@ -35,13 +35,11 @@ class PokeAPI extends AbstractController
 
         $responseJson = json_decode($response->getBody()->getContents(), true);
 
-        $namedAPIResourceList = new NamedAPIResourceList();
-        $namedAPIResourceList->setCount($responseJson['count']);
-        $namedAPIResourceList->setNext($responseJson['next']);
-        $namedAPIResourceList->setPrevious($responseJson['previous']);
-        $namedAPIResourceList->setResults($responseJson['results']);
-
-        return $namedAPIResourceList;
+        return (new NamedAPIResourceList())
+            ->setCount($responseJson['count'])
+            ->setNext($responseJson['next'])
+            ->setPrevious($responseJson['previous'])
+            ->setResults($responseJson['results']);
     }
 
     public function fetchPokemonName(string $name): array
@@ -49,25 +47,26 @@ class PokeAPI extends AbstractController
         $response = $this->client->request('GET', 'pokemon/' . $name);
         $responseJson = json_decode($response->getBody()->getContents(), true);
 
-        $pokemon = new Pokemon;
-        $pokemon->setId($responseJson['id']);
-        $pokemon->setName($responseJson['name']);
-        $pokemon->setBaseExperience($responseJson['base_experience']);
-        $pokemon->setHeight($responseJson['height']);
-        $pokemon->setIsDefault($responseJson['is_default']);
-        $pokemon->setOrder($responseJson['order']);
-        $pokemon->setWeight($responseJson['weight']);
-        $pokemon->setAbilities($responseJson['abilities']);
-        $pokemon->setForms($responseJson['forms']);
-        $pokemon->setGameIndices($responseJson['game_indices']);
-        $pokemon->setHeldItems($responseJson['held_items']);
-        $pokemon->setLocationAreaEncounters($responseJson['location_area_encounters']);
-        $pokemon->setMoves($responseJson['moves']);
-        $pokemon->setPostTypes($responseJson['past_types']);
-        $pokemon->setSprites($responseJson['sprites']);
-        $pokemon->setSpecies($responseJson['species']);
-        $pokemon->setStats($responseJson['stats']);
-        $pokemon->setTypes($responseJson['types']);
+        $pokemon = (new Pokemon)
+            ->setId($responseJson['id'])
+            ->setName($responseJson['name'])
+            ->setBaseExperience($responseJson['base_experience'])
+            ->setHeight($responseJson['height'])
+            ->setIsDefault($responseJson['is_default'])
+            ->setOrder($responseJson['order'])
+            ->setWeight($responseJson['weight'])
+            ->setAbilities($responseJson['abilities'])
+            ->setForms($responseJson['forms'])
+            ->setGameIndices($responseJson['game_indices'])
+            ->setHeldItems($responseJson['held_items'])
+            ->setLocationAreaEncounters($responseJson['location_area_encounters'])
+            ->setMoves($responseJson['moves'])
+            ->setPostTypes($responseJson['past_types'])
+            ->setSprites($responseJson['sprites'])
+            ->setSpecies($responseJson['species'])
+            ->setStats($responseJson['stats'])
+            ->setTypes($responseJson['types'])
+        ;
 
         return $pokemon->jsonSerialize();
     }

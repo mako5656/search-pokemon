@@ -41,9 +41,11 @@ class Pokemon
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): string
@@ -51,9 +53,11 @@ class Pokemon
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     public function getBaseExperience(): int
@@ -61,9 +65,11 @@ class Pokemon
         return $this->baseExperience;
     }
 
-    public function setBaseExperience(int $baseExperience): void
+    public function setBaseExperience(int $baseExperience): self
     {
         $this->baseExperience = $baseExperience;
+
+        return $this;
     }
 
     public function getHeight(): int
@@ -71,9 +77,11 @@ class Pokemon
         return $this->height;
     }
 
-    public function setHeight(int $height): void
+    public function setHeight(int $height): self
     {
         $this->height = $height;
+
+        return $this;
     }
 
     public function getIsDefault(): bool
@@ -81,9 +89,11 @@ class Pokemon
         return $this->isDefault;
     }
 
-    public function setIsDefault(bool $isDefault): void
+    public function setIsDefault(bool $isDefault): self
     {
         $this->isDefault = $isDefault;
+
+        return $this;
     }
 
     public function getOrder(): int
@@ -91,9 +101,11 @@ class Pokemon
         return $this->order;
     }
 
-    public function setOrder(int $order): void
+    public function setOrder(int $order): self
     {
         $this->order = $order;
+
+        return $this;
     }
 
     public function getWeight(): int
@@ -101,9 +113,11 @@ class Pokemon
         return $this->weight;
     }
 
-    public function setWeight(int $weight): void
+    public function setWeight(int $weight): self
     {
         $this->weight = $weight;
+
+        return $this;
     }
 
     public function getAbilities(): array
@@ -111,9 +125,11 @@ class Pokemon
         return $this->abilities;
     }
 
-    public function setAbilities(array $abilities): void
+    public function setAbilities(array $abilities): self
     {
         $this->abilities = $abilities;
+
+        return $this;
     }
 
     public function getForms(): array
@@ -121,9 +137,11 @@ class Pokemon
         return $this->forms;
     }
 
-    public function setForms(array $forms): void
+    public function setForms(array $forms): self
     {
         $this->forms = $forms;
+
+        return $this;
     }
 
     public function getGameIndices(): array
@@ -131,9 +149,11 @@ class Pokemon
         return $this->gameIndices;
     }
 
-    public function setGameIndices(array $gameIndices): void
+    public function setGameIndices(array $gameIndices): self
     {
         $this->gameIndices = $gameIndices;
+
+        return $this;
     }
 
     public function getHeldItems(): array
@@ -141,9 +161,11 @@ class Pokemon
         return $this->heldItems;
     }
 
-    public function setHeldItems(array $heldItems): void
+    public function setHeldItems(array $heldItems): self
     {
         $this->heldItems = $heldItems;
+
+        return $this;
     }
 
     public function getLocationAreaEncounters(): string
@@ -151,9 +173,11 @@ class Pokemon
         return $this->locationAreaEncounters;
     }
 
-    public function setLocationAreaEncounters(string $locationAreaEncounters): void
+    public function setLocationAreaEncounters(string $locationAreaEncounters): self
     {
         $this->locationAreaEncounters = $locationAreaEncounters;
+
+        return $this;
     }
 
     public function getMoves(): array
@@ -161,9 +185,11 @@ class Pokemon
         return $this->moves;
     }
 
-    public function setMoves(array $moves): void
+    public function setMoves(array $moves): self
     {
         $this->moves = $moves;
+
+        return $this;
     }
 
     public function getPastTypes(): array
@@ -171,9 +197,11 @@ class Pokemon
         return $this->pastTypes;
     }
 
-    public function setPostTypes(array $pastTypes): void
+    public function setPostTypes(array $pastTypes): self
     {
         $this->pastTypes = $pastTypes;
+
+        return $this;
     }
 
     public function getSprites(): array
@@ -181,9 +209,11 @@ class Pokemon
         return $this->sprites;
     }
 
-    public function setSprites(array $sprites): void
+    public function setSprites(array $sprites): self
     {
         $this->sprites = $sprites;
+
+        return $this;
     }
 
     public function getSpecies(): array
@@ -191,9 +221,11 @@ class Pokemon
         return $this->species;
     }
 
-    public function setSpecies(array $species): void
+    public function setSpecies(array $species): self
     {
         $this->species = $species;
+
+        return $this;
     }
 
     public function getStats(): array
@@ -201,9 +233,11 @@ class Pokemon
         return $this->stats;
     }
 
-    public function setStats(array $stats): void
+    public function setStats(array $stats): self
     {
         $this->stats = $stats;
+
+        return $this;
     }
 
     public function getTypes(): array
@@ -211,9 +245,11 @@ class Pokemon
         return $this->types;
     }
 
-    public function setTypes(array $types): void
+    public function setTypes(array $types): self
     {
         $this->types = $types;
+
+        return $this;
     }
 
     public function jsonSerialize(): array

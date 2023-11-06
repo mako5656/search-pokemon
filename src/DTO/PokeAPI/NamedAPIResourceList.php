@@ -17,9 +17,11 @@ class NamedAPIResourceList
         return $this->count;
     }
 
-    function setCount(int $count): void
+    function setCount(int $count): self
     {
         $this->count = $count;
+
+        return $this;
     }
 
     function getNext(): ?string
@@ -27,9 +29,11 @@ class NamedAPIResourceList
         return $this->next;
     }
 
-    function setNext(?string $next): void
+    function setNext(?string $next): self
     {
         $this->next = $next;
+
+        return $this;
     }
 
     function getPrevious(): ?string
@@ -37,9 +41,11 @@ class NamedAPIResourceList
         return $this->previous;
     }
 
-    function setPrevious(?string $previous): void
+    function setPrevious(?string $previous): self
     {
         $this->previous = $previous;
+
+        return $this;
     }
 
     function getResults(): array
@@ -47,8 +53,10 @@ class NamedAPIResourceList
         return $this->results;
     }
 
-    function setResults(array $results): void
+    function setResults(array $results): self
     {
         $this->results = $results;
+
+        return $this;
     }
 }

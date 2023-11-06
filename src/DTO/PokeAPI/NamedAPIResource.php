@@ -15,9 +15,11 @@ class NamedAPIResource
         return $this->name;
     }
 
-    function setName(string $name): void
+    function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     function getUrl(): string
@@ -25,8 +27,10 @@ class NamedAPIResource
         return $this->url;
     }
 
-    function setUrl(string $url): void
+    function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
     }
 }

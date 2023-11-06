@@ -24,9 +24,11 @@ class Ability
         return $this->id;
     }
 
-    function setId(int $id): void
+    function setId(int $id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
     function getName(): string
@@ -34,9 +36,11 @@ class Ability
         return $this->name;
     }
 
-    function setName(string $name): void
+    function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     function getIsMainSeries(): bool
@@ -44,9 +48,11 @@ class Ability
         return $this->isMainSeries;
     }
 
-    function setIsMainSeries(bool $isMainSeries): void
+    function setIsMainSeries(bool $isMainSeries): self
     {
         $this->isMainSeries = $isMainSeries;
+
+        return $this;
     }
 
     function getGeneration(): array
@@ -54,9 +60,11 @@ class Ability
         return $this->generation;
     }
 
-    function setGeneration(array $generation): void
+    function setGeneration(array $generation): self
     {
         $this->generation = $generation;
+
+        return $this;
     }
 
     function getNames(): array
@@ -64,9 +72,11 @@ class Ability
         return $this->names;
     }
 
-    function setNames(array $names): void
+    function setNames(array $names): self
     {
         $this->names = $names;
+
+        return $this;
     }
 
     function getEffectEntries(): array
@@ -74,9 +84,11 @@ class Ability
         return $this->effectEntries;
     }
 
-    function setEffectEntries(array $effectEntries): void
+    function setEffectEntries(array $effectEntries): self
     {
         $this->effectEntries = $effectEntries;
+
+        return $this;
     }
 
     function getEffectChanges(): array
@@ -84,9 +96,11 @@ class Ability
         return $this->effectChanges;
     }
 
-    function setEffectChanges(array $effectChanges): void
+    function setEffectChanges(array $effectChanges): self
     {
         $this->effectChanges = $effectChanges;
+
+        return $this;
     }
 
     function getFlavorTextEntries(): array
@@ -94,9 +108,11 @@ class Ability
         return $this->flavorTextEntries;
     }
 
-    function setFlavorTextEntries(array $flavorTextEntries): void
+    function setFlavorTextEntries(array $flavorTextEntries): self
     {
         $this->flavorTextEntries = $flavorTextEntries;
+
+        return $this;
     }
 
     function getPokemon(): array
@@ -104,8 +120,10 @@ class Ability
         return $this->pokemon;
     }
 
-    function setPokemon(array $pokemon): void
+    function setPokemon(array $pokemon): self
     {
         $this->pokemon = $pokemon;
+
+        return $this;
     }
 }
