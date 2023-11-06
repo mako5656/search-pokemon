@@ -6,9 +6,8 @@ namespace App\Controller;
 
 class GetImagePokemon
 {
-    public function getImagePokemon(array $pokemon): string
+    public function getFrontDefaultImage(array $pokemonSprites): string
     {
-        $pokemonSprites = $pokemon['sprites'];
         return $pokemonSprites['front_default'];
     }
 }

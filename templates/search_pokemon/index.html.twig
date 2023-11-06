@@ -8,9 +8,7 @@
     {{ form_end(form) }}
 
     {% if posts|length > 0  %}
-        ・名前：{{ posts.name }}<br>
-        ・高さ：{{ posts.height }}<br>
-        ・重さ{{ posts.weight }}<br>
-        <img src="{{ image }}" alt="{{ posts.name }} Front Image">
+        <img src="{{ image }}" alt="{{ posts.name }} Front Image"><br>
+        名前：{{ posts.name }}
     {% endif %}
 {% endblock %}
