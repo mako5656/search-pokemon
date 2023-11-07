@@ -15,6 +15,7 @@ class SearchPokemon extends AbstractController
     public function __construct(
         private readonly PokeAPI $pokeApi,
         private readonly GetImagePokemon $getImagePokemon,
+        private readonly GetTypePokemon $getTypePokemon,
     ){
     }
 
@@ -33,6 +34,11 @@ class SearchPokemon extends AbstractController
             } else {
                 // ポケモンのデフォルト画像を取得
                 $pokemonFrontImage = $this->getImagePokemon->getFrontDefaultImage($pokemon['sprites']);
+                // ポケモンのタイプを取得
+                $pokemonType = $this->getTypePokemon->getType($pokemon['types'][0]['type']);
+                // ポケモンのタイプ色を取得
+                $pokemonTypeColor = $this->getTypePokemon->getTypeColor($pokemon['types'][0]['type']);
+
                 $this->addFlash('success', 'ポケモンが見つかりました！');
             }
         }
@@ -41,6 +47,8 @@ class SearchPokemon extends AbstractController
             'form' => $form->createView(),
             'posts' => $pokemon ?? [],
             'image' => $pokemonFrontImage ?? '',
+            'type' => $pokemonType ?? '',
+            'typeColor' => $pokemonTypeColor ?? '',
         ]);
     }
 }

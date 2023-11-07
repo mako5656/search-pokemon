@@ -19,6 +19,8 @@
 
     {% if posts|length > 0  %}
         <img src="{{ image }}" alt="{{ posts.name }} Front Image"><br>
-        名前：{{ posts.name }}
+        名前：{{ posts.name }}<br>
+        タイプ：{{ type }}<br>
+        タイプ色：{{ typeColor }}<br>
     {% endif %}
 {% endblock %}
