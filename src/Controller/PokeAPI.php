@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\DTO\PokeAPI\NamedAPIResourceList;
 use App\DTO\PokeAPI\Pokemon;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PokeAPI extends AbstractController
@@ -44,7 +45,11 @@ class PokeAPI extends AbstractController
 
     public function fetchPokemonName(string $name): array
     {
-        $response = $this->client->request('GET', 'pokemon/' . $name);
+        try {
+            $response = $this->client->request('GET', 'pokemon/' . $name);
+        } catch (GuzzleException $e) {
+            return [];
+        }
         $responseJson = json_decode($response->getBody()->getContents(), true);
 
         $pokemon = (new Pokemon)

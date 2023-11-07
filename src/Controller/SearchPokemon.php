@@ -26,11 +26,15 @@ class SearchPokemon extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            // ポケモンの名前からそのポケモンの情報を取得
             $pokemon = $this->pokeApi->fetchPokemonName($data['pokemonName']);
-
-            $pokemonFrontImage = $this->getImagePokemon->getFrontDefaultImage($pokemon['sprites']);
-
-            $this->addFlash('success', '検索成功');
+            if ($pokemon === []) {
+                $this->addFlash('error', '検索失敗');
+            } else {
+                // ポケモンのデフォルト画像を取得
+                $pokemonFrontImage = $this->getImagePokemon->getFrontDefaultImage($pokemon['sprites']);
+                $this->addFlash('success', '検索成功');
+            }
         }
 
         return $this->render('search_pokemon/index.html.twig', [
