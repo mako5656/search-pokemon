@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>ポケモン検索</h1>
-    {{ form_start(form) }}
-    {{ form_row(form.pokemonName) }}
-    {{ form_row(form.submit) }}
-    {{ form_end(form) }}
+    <h1 class="text-3xl font-bold">ポケモン検索</h1>
+
+    <div class="flex flex-col sm:flex-row sm:items-center mb-6">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="mb-4 sm:mb-0 sm:flex sm:space-x-4">
+            <div class="w-full sm:w-1/2">
+                {{ form_row(form.pokemonName) }}
+            </div>
+            <div class="w-full sm:w-1/2 flex items-center">
+                {{ form_widget(form.submit, {'attr': {'class': 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'}}) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
 
     {% if posts|length > 0  %}
         <img src="{{ image }}" alt="{{ posts.name }} Front Image"><br>

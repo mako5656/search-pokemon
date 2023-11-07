@@ -29,11 +29,11 @@ class SearchPokemon extends AbstractController
             // ポケモンの名前からそのポケモンの情報を取得
             $pokemon = $this->pokeApi->fetchPokemonName($data['pokemonName']);
             if ($pokemon === []) {
-                $this->addFlash('error', '検索失敗');
+                $this->addFlash('error', 'ポケモンが見つかりませんでした');
             } else {
                 // ポケモンのデフォルト画像を取得
                 $pokemonFrontImage = $this->getImagePokemon->getFrontDefaultImage($pokemon['sprites']);
-                $this->addFlash('success', '検索成功');
+                $this->addFlash('success', 'ポケモンが見つかりました！');
             }
         }
 

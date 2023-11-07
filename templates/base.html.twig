@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html class="">
+<html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}PokeAPIを使ったポケモン検索サイト{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
         {% endblock %}
@@ -11,13 +11,8 @@
         {% endblock %}
 
         <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            window.tailwindConfig = {
-                darkMode: 'class',
-            };
-        </script>
     </head>
-    <body class="bg-gray-100 text-gray-800 m-10 dark:bg-gray-800 dark:text-white">
+    <body class="bg-gray-100 text-gray-800 m-10">
         <div class="w-full md:w-2/3 mx-auto">
             {% for message in app.flashes('success') %}
                 <div class="rounded-md p-2 border-green-300 bg-green-50 border dark:border-green-600 dark:bg-green-700 dark:text-white md-4">{{ message }}</div>
