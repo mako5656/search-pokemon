@@ -5,9 +5,15 @@
 
     <div class="flex flex-col sm:flex-row sm:items-center mb-6">
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="w-full sm:w-1/2">
+            {{ form_row(form.pokemonName) }}
+        </div>
         <div class="mb-4 sm:mb-0 sm:flex sm:space-x-4">
             <div class="w-full sm:w-1/2">
-                {{ form_row(form.pokemonName) }}
+                {{ form_row(form.type) }}
+            </div>
+            <div class="w-full sm:w-1/2">
+                {{ form_row(form.limit) }}
             </div>
             <div class="w-full sm:w-1/2 flex items-center">
                 {{ form_widget(form.submit, {'attr': {'class': 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'}}) }}
@@ -16,11 +22,20 @@
         {{ form_end(form) }}
     </div>
 
-
-    {% if posts|length > 0  %}
-        <img src="{{ image }}" alt="{{ posts.name }} Front Image"><br>
-        名前：{{ posts.name }}<br>
-        タイプ：{{ type }}<br>
-        タイプ色：{{ typeColor }}<br>
+    {% if count|length > 0  %}
+        <div class="flex flex-wrap">
+            {% for i in 0..limit-1 %}
+                <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2">
+                    <div class="bg-white rounded-lg shadow-lg">
+                        <div class="p-4">
+                            <img src="{{ image[i] }}" alt="{{ pokemonInfo[i].name }} Front Image"><br>
+                            名前：{{ pokemonInfo[i].name }}<br>
+                            タイプ：{{ type[i] }}<br>
+                            タイプ色：{{ typeColor[i] }}<br>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
 {% endblock %}

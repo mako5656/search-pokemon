@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DTO\PokeAPI\NamedAPIResource;
 use App\Form\SearchPokemonType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,16 +29,26 @@ class SearchPokemon extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             // ポケモンの名前からそのポケモンの情報を取得
-            $pokemon = $this->pokeApi->fetchPokemonName($data['pokemonName']);
-            if ($pokemon === []) {
+            $namedAPIResourceList = $this->pokeApi->fetchPokemon($data['limit']);
+            $count = $namedAPIResourceList->getCount();
+            if ($count === 0) {
                 $this->addFlash('error', 'ポケモンが見つかりませんでした');
             } else {
-                // ポケモンのデフォルト画像を取得
-                $pokemonFrontImage = $this->getImagePokemon->getFrontDefaultImage($pokemon['sprites']);
-                // ポケモンのタイプを取得
-                $pokemonType = $this->getTypePokemon->getType($pokemon['types'][0]['type']);
-                // ポケモンのタイプ色を取得
-                $pokemonTypeColor = $this->getTypePokemon->getTypeColor($pokemon['types'][0]['type']);
+                foreach ($namedAPIResourceList->getResults() as $pokemon) {
+                    $namedAPIResourceList = (new NamedAPIResource())
+                        ->setName($pokemon['name'])
+                        ->setUrl($pokemon['url'])
+                    ;
+                    $pokemons = $this->pokeApi->fetchPokemonName($namedAPIResourceList->getName());
+                    // ポケモンの情報を取得
+                    $pokemonInfo[] = $pokemons;
+                    // ポケモンのデフォルト画像を取得
+                    $pokemonFrontImage[] = $this->getImagePokemon->getFrontDefaultImage($pokemons['sprites']);
+                    // ポケモンのタイプを取得
+                    $pokemonType[] = $this->getTypePokemon->getType($pokemons['types'][0]['type']);
+                    // ポケモンのタイプ色を取得
+                    $pokemonTypeColor[] = $this->getTypePokemon->getTypeColor($pokemons['types'][0]['type']);
+                }
 
                 $this->addFlash('success', 'ポケモンが見つかりました！');
             }
@@ -45,10 +56,12 @@ class SearchPokemon extends AbstractController
 
         return $this->render('search_pokemon/index.html.twig', [
             'form' => $form->createView(),
-            'posts' => $pokemon ?? [],
+            'pokemonInfo' => $pokemonInfo ?? [],
             'image' => $pokemonFrontImage ?? '',
             'type' => $pokemonType ?? '',
             'typeColor' => $pokemonTypeColor ?? '',
+            'limit' => $data['limit'] ?? '',
+            'count' => $count ?? '',
         ]);
     }
 }
