@@ -10,24 +10,24 @@ class NamedAPIResource
     private string $name;
     private string $url;
 
-    function getName(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    function setName(string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    function getUrl(): string
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    function setUrl(string $url): self
+    public function setUrl(string $url): self
     {
         $this->url = $url;
 

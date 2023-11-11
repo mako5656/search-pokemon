@@ -19,7 +19,7 @@ class SearchPokemon extends AbstractController
         private readonly PokeAPI $pokeApi,
         private readonly GetImagePokemon $getImagePokemon,
         private readonly GetTypePokemon $getTypePokemon,
-    ){
+    ) {
     }
 
     #[Route('/search_pokemon', name: 'search_pokemon')]

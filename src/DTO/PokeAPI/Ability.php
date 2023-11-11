@@ -19,108 +19,108 @@ class Ability
     private array $flavorTextEntries;
     private array $pokemon;
 
-    function getId(): int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    function setId(int $id): self
+    public function setId(int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    function getName(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    function setName(string $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    function getIsMainSeries(): bool
+    public function getIsMainSeries(): bool
     {
         return $this->isMainSeries;
     }
 
-    function setIsMainSeries(bool $isMainSeries): self
+    public function setIsMainSeries(bool $isMainSeries): self
     {
         $this->isMainSeries = $isMainSeries;
 
         return $this;
     }
 
-    function getGeneration(): array
+    public function getGeneration(): array
     {
         return $this->generation;
     }
 
-    function setGeneration(array $generation): self
+    public function setGeneration(array $generation): self
     {
         $this->generation = $generation;
 
         return $this;
     }
 
-    function getNames(): array
+    public function getNames(): array
     {
         return $this->names;
     }
 
-    function setNames(array $names): self
+    public function setNames(array $names): self
     {
         $this->names = $names;
 
         return $this;
     }
 
-    function getEffectEntries(): array
+    public function getEffectEntries(): array
     {
         return $this->effectEntries;
     }
 
-    function setEffectEntries(array $effectEntries): self
+    public function setEffectEntries(array $effectEntries): self
     {
         $this->effectEntries = $effectEntries;
 
         return $this;
     }
 
-    function getEffectChanges(): array
+    public function getEffectChanges(): array
     {
         return $this->effectChanges;
     }
 
-    function setEffectChanges(array $effectChanges): self
+    public function setEffectChanges(array $effectChanges): self
     {
         $this->effectChanges = $effectChanges;
 
         return $this;
     }
 
-    function getFlavorTextEntries(): array
+    public function getFlavorTextEntries(): array
     {
         return $this->flavorTextEntries;
     }
 
-    function setFlavorTextEntries(array $flavorTextEntries): self
+    public function setFlavorTextEntries(array $flavorTextEntries): self
     {
         $this->flavorTextEntries = $flavorTextEntries;
 
         return $this;
     }
 
-    function getPokemon(): array
+    public function getPokemon(): array
     {
         return $this->pokemon;
     }
 
-    function setPokemon(array $pokemon): self
+    public function setPokemon(array $pokemon): self
     {
         $this->pokemon = $pokemon;
 

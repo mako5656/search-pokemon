@@ -38,9 +38,11 @@ class GetTypePokemon
     {
         $pokemonTypeList = $this->getTypeName($pokemonTypes);
         $typeName = [];
-        foreach ($pokemonTypeList as $pokemonType)
-            $typeName[] = $this->typeToColor($pokemonType->getType()->getName()
-        );
+        foreach ($pokemonTypeList as $pokemonType) {
+            $typeName[] = $this->typeToColor(
+                $pokemonType->getType()->getName()
+            );
+        }
         return $typeName;
     }
 
