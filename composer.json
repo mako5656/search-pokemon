@@ -45,6 +45,8 @@
         "symfony/polyfill-php81": "*"
     },
     "scripts": {
+        "cs": "@php php-cs-fixer fix -v --dry-run",
+        "cs-fix": "@php php-cs-fixer fix -v",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
@@ -66,6 +68,7 @@
         }
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.38",
         "symfony/stopwatch": "6.3.*",
         "symfony/web-profiler-bundle": "6.3.*"
     }
