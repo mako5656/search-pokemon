@@ -7,8 +7,6 @@ namespace App\DTO\PokeAPI;
 // https://pokeapi.co/docs/v2#abilities
 class Ability
 {
-    const POKEAPI_ENDPOINT = 'ability';
-
     private int $id;
     private string $name;
     private bool $isMainSeries;

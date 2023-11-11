@@ -14,9 +14,13 @@ class Pokemon
     private bool $isDefault;
     private int $order;
     private int $weight;
-    // Ability[] $abilities
+    /**
+     * @var list<Ability> $abilities
+     */
     private array $abilities = [];
-    // NamedAPIResource(PokemonForm)[] $forms
+    /**
+     * @var list<NamedAPIResource> $forms
+     */
     private array $forms = [];
     // VersionGameIndex[] $gameIndices
     private array $gameIndices = [];
@@ -27,13 +31,19 @@ class Pokemon
     private array $moves = [];
     // PokemonTypePast[] $pastTypes
     private array $pastTypes = [];
-    // PokemonSprites[] $sprites
+    /**
+     * @var list<PokemonSprites> $sprites
+     */
     private array $sprites = [];
-    // NamedAPIResource(PokemonSpecies)[] $species
+    /**
+     * @var list<NamedAPIResource> $species
+     */
     private array $species = [];
     // PokemonStat[] $stats
     private array $stats = [];
-    // PokemonType[] $types
+    /**
+     * @var list<PokemonType> $types
+     */
     private array $types = [];
 
     public function getId(): int
@@ -120,11 +130,17 @@ class Pokemon
         return $this;
     }
 
+    /**
+     * @return list<Ability>
+     */
     public function getAbilities(): array
     {
         return $this->abilities;
     }
 
+    /**
+     * @param list<Ability> $abilities
+     */
     public function setAbilities(array $abilities): self
     {
         $this->abilities = $abilities;
@@ -132,11 +148,17 @@ class Pokemon
         return $this;
     }
 
+    /**
+     * @return list<NamedAPIResource>
+     */
     public function getForms(): array
     {
         return $this->forms;
     }
 
+    /**
+     * @param list<NamedAPIResource> $forms
+     */
     public function setForms(array $forms): self
     {
         $this->forms = $forms;
@@ -204,11 +226,17 @@ class Pokemon
         return $this;
     }
 
+    /**
+     * @return list<PokemonSprites>
+     */
     public function getSprites(): array
     {
         return $this->sprites;
     }
 
+    /**
+     * @param list<PokemonSprites> $sprites
+     */
     public function setSprites(array $sprites): self
     {
         $this->sprites = $sprites;
@@ -216,11 +244,17 @@ class Pokemon
         return $this;
     }
 
+    /**
+     * @return list<NamedAPIResource>
+     */
     public function getSpecies(): array
     {
         return $this->species;
     }
 
+    /**
+     * @param list<NamedAPIResource> $species
+     */
     public function setSpecies(array $species): self
     {
         $this->species = $species;
@@ -240,39 +274,21 @@ class Pokemon
         return $this;
     }
 
+    /**
+     * @return list<PokemonType>
+     */
     public function getTypes(): array
     {
         return $this->types;
     }
 
+    /**
+     * @param list<PokemonType> $types
+     */
     public function setTypes(array $types): self
     {
         $this->types = $types;
 
         return $this;
-    }
-
-    public function jsonSerialize(): array
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'base_experience' => $this->baseExperience,
-            'height' => $this->height,
-            'is_default' => $this->isDefault,
-            'order' => $this->order,
-            'weight' => $this->weight,
-            'abilities' => $this->abilities,
-            'forms' => $this->forms,
-            'game_indices' => $this->gameIndices,
-            'held_items' => $this->heldItems,
-            'location_area_encounters' => $this->locationAreaEncounters,
-            'moves' => $this->moves,
-            'past_types' => $this->pastTypes,
-            'sprites' => $this->sprites,
-            'species' => $this->species,
-            'stats' => $this->stats,
-            'types' => $this->types,
-        ];
     }
 }

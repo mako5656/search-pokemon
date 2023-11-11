@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\DTO\PokeAPI\NamedAPIResource;
 use App\DTO\PokeAPI\NamedAPIResourceList;
 use App\DTO\PokeAPI\Pokemon;
 use GuzzleHttp\Client;
@@ -42,16 +43,12 @@ class PokeAPI extends AbstractController
             ->setResults($responseJson['results']);
     }
 
-    public function fetchPokemonName(string $name): array
+    public function fetchPokemonName(string $name): Pokemon
     {
-        try {
-            $response = $this->client->request('GET', 'pokemon/' . $name);
-        } catch (GuzzleException $e) {
-            return [];
-        }
+        $response = $this->client->request('GET', 'pokemon/' . $name);
         $responseJson = json_decode($response->getBody()->getContents(), true);
 
-        $pokemon = (new Pokemon)
+        return (new Pokemon)
             ->setId($responseJson['id'])
             ->setName($responseJson['name'])
             ->setBaseExperience($responseJson['base_experience'])
@@ -69,10 +66,7 @@ class PokeAPI extends AbstractController
             ->setSprites($responseJson['sprites'])
             ->setSpecies($responseJson['species'])
             ->setStats($responseJson['stats'])
-            ->setTypes($responseJson['types'])
-        ;
-
-        return $pokemon->jsonSerialize();
+            ->setTypes($responseJson['types']);
     }
 
     public function fetchPokemonId(int $id): array

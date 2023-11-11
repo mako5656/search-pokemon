@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\DTO\PokeAPI\NamedAPIResource;
 use App\Form\SearchPokemonType;
+use App\Service\Filter;
 use App\Service\GetImagePokemon;
 use App\Service\GetTypePokemon;
 use App\Service\PokeAPI;
@@ -37,18 +38,19 @@ class SearchPokemon extends AbstractController
             if ($count === 0) {
                 $this->addFlash('error', 'ポケモンが見つかりませんでした');
             } else {
-                foreach ($namedAPIResourceList->getResults() as $pokemon) {
-                    $namedAPIResourceList = (new NamedAPIResource())
-                        ->setName($pokemon['name'])
-                        ->setUrl($pokemon['url'])
+                foreach ($namedAPIResourceList->getResults() as $pokemonResult) {
+                    $resultPokemonList = (new NamedAPIResource())
+                        ->setName($pokemonResult['name'])
+                        ->setUrl($pokemonResult['url'])
                     ;
-                    $pokemons = $this->pokeApi->fetchPokemonName($namedAPIResourceList->getName());
+                    $pokemon = $this->pokeApi->fetchPokemonName($resultPokemonList->getName());
+
                     // ポケモンの情報を取得
-                    $pokemonInfo[] = $pokemons;
+                    $pokemonInfo[] = $pokemon;
                     // ポケモンのデフォルト画像を取得
-                    $pokemonFrontImage[] = $this->getImagePokemon->getFrontDefaultImage($pokemons['sprites']);
+                    $pokemonFrontImage[] = $this->getImagePokemon->getFrontDefaultImage($pokemon->getSprites());
                     // ポケモンのタイプ色を取得
-                    $pokemonTypeColor[] = $this->getTypePokemon->getTypeColor($pokemons['types']);
+                    $pokemonTypeColor[] = $this->getTypePokemon->getTypeColor($pokemon->getTypes());
                 }
 
                 $this->addFlash('success', 'ポケモンが見つかりました！');

@@ -10,6 +10,9 @@ class NamedAPIResourceList
     private int $count;
     private ?string $next = null;
     private ?string $previous = null;
+    /**
+     * @var list<NamedAPIResource>
+     */
     private array $results;
 
     public function getCount(): int
@@ -48,11 +51,17 @@ class NamedAPIResourceList
         return $this;
     }
 
+    /**
+     * @return list<NamedAPIResource>
+     */
     public function getResults(): array
     {
         return $this->results;
     }
 
+    /**
+     * @param list<NamedAPIResource> $results
+     */
     public function setResults(array $results): self
     {
         $this->results = $results;
