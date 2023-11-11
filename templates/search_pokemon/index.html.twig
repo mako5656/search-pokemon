@@ -30,8 +30,11 @@
                         <div class="p-4">
                             <img src="{{ image[i] }}" alt="{{ pokemonInfo[i].name }} Front Image"><br>
                             名前：{{ pokemonInfo[i].name }}<br>
-                            タイプ：{{ type[i] }}<br>
-                            タイプ色：{{ typeColor[i] }}<br>
+                            タイプ色：
+                            {% for j in 0..typeColor[i]|length - 1 %}
+                                {{ typeColor[i][j] }}
+                            {% endfor %}
+                            <br>
                         </div>
                     </div>
                 </div>

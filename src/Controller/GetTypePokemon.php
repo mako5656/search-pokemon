@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DTO\PokeAPI\PokemonType;
+
 class GetTypePokemon
 {
     public function getType(array $pokemonType): string
@@ -11,9 +13,19 @@ class GetTypePokemon
         return $pokemonType['name'];
     }
 
-    public function getTypeColor(array $pokemonType): string
+    /**
+     * @param list<PokemonType> $pokemonTypeList
+     * @return list<PokemonType>
+     */
+    public function getTypeColor(array $pokemonTypeList): array
     {
-        return $this->typeToColor($pokemonType['name']);
+        $typeName = [];
+        foreach ($pokemonTypeList as $pokemonType)
+        {
+            assert($pokemonType instanceof PokemonType);
+            $typeName[] = $this->typeToColor($pokemonType->getType()->getName());
+        }
+        return $typeName;
     }
 
     public function typeToColor(string $type): string

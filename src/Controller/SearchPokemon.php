@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\DTO\PokeAPI\NamedAPIResource;
+use App\DTO\PokeAPI\PokemonType;
 use App\Form\SearchPokemonType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,10 +45,19 @@ class SearchPokemon extends AbstractController
                     $pokemonInfo[] = $pokemons;
                     // ポケモンのデフォルト画像を取得
                     $pokemonFrontImage[] = $this->getImagePokemon->getFrontDefaultImage($pokemons['sprites']);
-                    // ポケモンのタイプを取得
-                    $pokemonType[] = $this->getTypePokemon->getType($pokemons['types'][0]['type']);
                     // ポケモンのタイプ色を取得
-                    $pokemonTypeColor[] = $this->getTypePokemon->getTypeColor($pokemons['types'][0]['type']);
+                    $pokemonTypeList = [];
+                    foreach ($pokemons['types'] as $pokemonType) {
+                        $namedAPIResourceList = (new NamedAPIResource())
+                            ->setName($pokemonType['type']['name'])
+                            ->setUrl($pokemonType['type']['url'])
+                        ;
+                        $pokemonTypeList[] = (new PokemonType())
+                            ->setSlot($pokemonType['slot'])
+                            ->setType($namedAPIResourceList)
+                        ;
+                    }
+                    $pokemonTypeColor[] = $this->getTypePokemon->getTypeColor($pokemonTypeList);
                 }
 
                 $this->addFlash('success', 'ポケモンが見つかりました！');
@@ -58,8 +68,7 @@ class SearchPokemon extends AbstractController
             'form' => $form->createView(),
             'pokemonInfo' => $pokemonInfo ?? [],
             'image' => $pokemonFrontImage ?? '',
-            'type' => $pokemonType ?? '',
-            'typeColor' => $pokemonTypeColor ?? '',
+            'typeColor' => $pokemonTypeColor ?? [],
             'limit' => $data['limit'] ?? '',
             'count' => $count ?? '',
         ]);
