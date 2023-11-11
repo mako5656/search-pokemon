@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\DTO\PokeAPI\NamedAPIResource;
-use App\DTO\PokeAPI\PokemonType;
 use App\Form\SearchPokemonType;
+use App\Service\GetImagePokemon;
+use App\Service\GetTypePokemon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,18 +47,7 @@ class SearchPokemon extends AbstractController
                     // ポケモンのデフォルト画像を取得
                     $pokemonFrontImage[] = $this->getImagePokemon->getFrontDefaultImage($pokemons['sprites']);
                     // ポケモンのタイプ色を取得
-                    $pokemonTypeList = [];
-                    foreach ($pokemons['types'] as $pokemonType) {
-                        $namedAPIResourceList = (new NamedAPIResource())
-                            ->setName($pokemonType['type']['name'])
-                            ->setUrl($pokemonType['type']['url'])
-                        ;
-                        $pokemonTypeList[] = (new PokemonType())
-                            ->setSlot($pokemonType['slot'])
-                            ->setType($namedAPIResourceList)
-                        ;
-                    }
-                    $pokemonTypeColor[] = $this->getTypePokemon->getTypeColor($pokemonTypeList);
+                    $pokemonTypeColor[] = $this->getTypePokemon->getTypeColor($pokemons['types']);
                 }
 
                 $this->addFlash('success', 'ポケモンが見つかりました！');
