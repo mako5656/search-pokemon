@@ -8,6 +8,7 @@ use App\DTO\PokeAPI\NamedAPIResource;
 use App\Form\SearchPokemonType;
 use App\Service\GetImagePokemon;
 use App\Service\GetTypePokemon;
+use App\Service\PokeAPI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
