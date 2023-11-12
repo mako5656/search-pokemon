@@ -34,6 +34,7 @@ class SearchPokemon extends AbstractController
             $data = $form->getData();
             // ポケモンの名前からそのポケモンの情報を取得
             $namedAPIResourceList = $this->pokeApi->fetchPokemon($data['limit']);
+            $limit = $data['limit'];
             $count = $namedAPIResourceList->getCount();
             if ($count === 0) {
                 $this->addFlash('error', 'ポケモンが見つかりませんでした');
@@ -44,6 +45,14 @@ class SearchPokemon extends AbstractController
                         ->setUrl($pokemonResult['url'])
                     ;
                     $pokemon = $this->pokeApi->fetchPokemonName($resultPokemonList->getName());
+
+                    // 入力した項目に一致するポケモンを取得
+                    [$pokemon, $isExistence] = (new Filter())->filterPokemon($pokemon, $data['name'], $data['type']);
+                    // 一致するポケモンが存在しない場合は、次のポケモンを取得
+                    if (!$isExistence) {
+                        $limit--;
+                        continue;
+                    }
 
                     // ポケモンの情報を取得
                     $pokemonInfo[] = $pokemon;
@@ -62,7 +71,7 @@ class SearchPokemon extends AbstractController
             'pokemonInfo' => $pokemonInfo ?? [],
             'image' => $pokemonFrontImage ?? '',
             'typeColor' => $pokemonTypeColor ?? [],
-            'limit' => $data['limit'] ?? '',
+            'limit' => $limit ?? '',
             'count' => $count ?? '',
         ]);
     }

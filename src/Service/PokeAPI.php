@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\DTO\PokeAPI\NamedAPIResource;
 use App\DTO\PokeAPI\NamedAPIResourceList;
 use App\DTO\PokeAPI\Pokemon;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PokeAPI extends AbstractController

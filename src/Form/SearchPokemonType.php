@@ -39,7 +39,7 @@ class SearchPokemonType extends AbstractType
                 ],
                 'required' => false,
             ])
-            ->add('pokemonName', TextType::class, [
+            ->add('name', TextType::class, [
                 'label' => 'ポケモンの名前',
                 'required' => false,
             ])
