@@ -21,6 +21,7 @@ class SearchPokemon extends AbstractController
         private readonly PokeAPI $pokeApi,
         private readonly GetImagePokemon $getImagePokemon,
         private readonly GetTypePokemon $getTypePokemon,
+        private readonly Filter $filter,
     ) {
     }
 
@@ -46,9 +47,9 @@ class SearchPokemon extends AbstractController
                     ;
                     $pokemon = $this->pokeApi->fetchPokemonName($resultPokemonList->getName());
 
+                    # TODO: 配列で返すのではなく初期化されたクラスだったら次のポケモンを取得ように処理を変更する
                     // 入力した項目に一致するポケモンを取得
-                    [$pokemon, $isExistence] = (new Filter())->filterPokemon($pokemon, $data['name'], $data['type']);
-                    // 一致するポケモンが存在しない場合は、次のポケモンを取得
+                    [$pokemon, $isExistence] = $this->filter->filterPokemon($pokemon, $data['name'], $data['type']);
                     if (!$isExistence) {
                         $limit--;
                         continue;
