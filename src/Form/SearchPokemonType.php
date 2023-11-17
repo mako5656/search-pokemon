@@ -43,17 +43,6 @@ class SearchPokemonType extends AbstractType
                 'label' => 'ポケモンの名前',
                 'required' => false,
             ])
-            ->add('limit', ChoiceType::class, [
-                'label' => '件数',
-                'choices' => [
-                    '5件' => 5,
-                    '10件' => 10,
-                    '20件' => 20,
-                    '50件' => 50,
-                    '100件' => 100,
-                ],
-                'required' => false,
-            ])
             ->add('submit', SubmitType::class, [
                 'label' => '検索',
             ])

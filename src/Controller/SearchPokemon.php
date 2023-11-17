@@ -17,6 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchPokemon extends AbstractController
 {
+    private int $limit = 20;
+
     public function __construct(
         private readonly PokeAPI $pokeApi,
         private readonly GetImagePokemon $getImagePokemon,
@@ -34,8 +36,8 @@ class SearchPokemon extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             // ポケモンの名前からそのポケモンの情報を取得
-            $namedAPIResourceList = $this->pokeApi->fetchPokemon($data['limit']);
-            $limit = $data['limit'];
+            $limit = $this->limit;
+            $namedAPIResourceList = $this->pokeApi->fetchPokemon($limit);
             $count = $namedAPIResourceList->getCount();
             if ($count === 0) {
                 $this->addFlash('error', 'ポケモンが見つかりませんでした');

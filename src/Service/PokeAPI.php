@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PokeAPI extends AbstractController
 {
     private Client $client;
-    protected int $limit = 20;
 
     public function __construct()
     {
@@ -27,7 +26,7 @@ class PokeAPI extends AbstractController
     ): NamedAPIResourceList {
         $response = $this->client->request('GET', 'pokemon/', [
             'query' => [
-                'limit' => $this->limit($limit),
+                'limit' => $limit,
                 'offset' => $offset,
             ],
         ]);
@@ -72,13 +71,5 @@ class PokeAPI extends AbstractController
         $response = $this->client->request('GET', 'pokemon/' . $id);
 
         return json_decode($response->getBody()->getContents(), true);
-    }
-
-    public function limit(int $limit = null): int
-    {
-        if ($limit !== null) {
-            return $limit;
-        }
-        return $this->limit;
     }
 }
