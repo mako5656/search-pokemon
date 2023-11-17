@@ -18,7 +18,7 @@ class GetListInfoPokemon
     ) {
     }
 
-    public function resultToInfo(array $results, $data): ListInfoPokemon
+    public function resultToInfo(array $results, array $data): ListInfoPokemon
     {
         foreach ($results as $pokemonResult) {
             $resultPokemonList = (new NamedAPIResource())
