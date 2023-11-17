@@ -6,7 +6,7 @@ namespace App\Service;
 
 class GetImagePokemon
 {
-    public function getFrontDefaultImage(array $pokemonSprites): string
+    public function getFrontDefaultImageUrl(array $pokemonSprites): string
     {
         return $pokemonSprites['front_default'];
     }

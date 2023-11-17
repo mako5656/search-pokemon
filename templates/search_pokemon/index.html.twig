@@ -19,14 +19,14 @@
         {{ form_end(form) }}
     </div>
 
-    {% if count|length > 0  %}
+    {% if count > 0  %}
         <div class="flex flex-wrap">
-            {% for i in 0..limit-1 %}
+            {% for i in 0..count-1 %}
                 <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2">
                     <div class="bg-white rounded-lg shadow-lg">
                         <div class="p-4">
-                            <img src="{{ image[i] }}" alt="{{ pokemonInfo[i].name }} Front Image"><br>
-                            名前：{{ pokemonInfo[i].name }}<br>
+                            <img src="{{ image[i] }}" alt="{{ name[i] }} Front Image"><br>
+                            名前：{{ name[i] }}<br>
                             タイプ色：
                             {% for j in 0..typeColor[i]|length - 1 %}
                                 {{ typeColor[i][j] }}
