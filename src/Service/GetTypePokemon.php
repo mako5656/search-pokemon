@@ -11,6 +11,22 @@ class GetTypePokemon
 {
     /**
      * @param array $pokemonTypes
+     * @return list<string>
+     */
+    public function getTypeColor(array $pokemonTypes): array
+    {
+        $pokemonTypeList = $this->getTypeName($pokemonTypes);
+        $typeName = [];
+        foreach ($pokemonTypeList as $pokemonType) {
+            $typeName[] = $this->typeToColor(
+                $pokemonType->getType()->getName()
+            );
+        }
+        return $typeName;
+    }
+
+    /**
+     * @param array $pokemonTypes
      * @return list<PokemonType>
      */
     public function getTypeName(array $pokemonTypes): array
@@ -28,22 +44,6 @@ class GetTypePokemon
             ;
         }
         return $pokemonTypeList;
-    }
-
-    /**
-     * @param array $pokemonTypes
-     * @return list<string>
-     */
-    public function getTypeColor(array $pokemonTypes): array
-    {
-        $pokemonTypeList = $this->getTypeName($pokemonTypes);
-        $typeName = [];
-        foreach ($pokemonTypeList as $pokemonType) {
-            $typeName[] = $this->typeToColor(
-                $pokemonType->getType()->getName()
-            );
-        }
-        return $typeName;
     }
 
     private function typeToColor(string $type): string
