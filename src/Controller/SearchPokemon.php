@@ -36,12 +36,12 @@ class SearchPokemon extends AbstractController
             // ポケモンの名前からそのポケモンの情報を取得
             $limit = $this->limit;
             $namedAPIResourceList = $this->pokeApi->fetchPokemon($limit);
-            $count = $namedAPIResourceList->getCount();
-            if ($count === 0) {
-                $this->addFlash('error', 'ポケモンが見つかりませんでした');
-            } else {
-                $listInfoPokemon = $this->getListInfoPokemon->resultToInfo($namedAPIResourceList->getResults(), $data);
 
+            $listInfoPokemon = $this->getListInfoPokemon->resultToInfo($namedAPIResourceList->getResults(), $data);
+
+            if ($listInfoPokemon->getId() === []) {
+                $this->addFlash('error', 'ポケモンが見つかりませんでした。');
+            } else {
                 $this->addFlash('success', 'ポケモンが見つかりました！');
             }
         }
