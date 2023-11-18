@@ -5,11 +5,15 @@
 
 ## 使用技術
 
-- Twig（symfony/twig-bundle）：`v6.3.0`
-- Guzzle（guzzlehttp/guzzle）：`v7.8.0`
-- PHP CS Fixer（friendsofphp/php-cs-fixer）：`v3.38.0`
+- Twig（[symfony/twig-bundle](https://github.com/symfony/twig-bundle)）
+- Guzzle（[guzzlehttp/guzzle](https://github.com/guzzle/guzzle)）
+- PHP CS Fixer（[friendsofphp/php-cs-fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer)）
+- PHPUnit（[phpunit/phpunit](https://github.com/sebastianbergmann/phpunit)）
+- Prophecy（[phpspec/prophecy-phpunit](https://github.com/phpspec/prophecy-phpunit)）
+- Symfony Profiler（[symfony/profiler-pack](https://github.com/symfony/profiler-pack))
 - TailwindCSS
 
 ## 参考
 
 - [PokeApi](https://pokeapi.co/)
+- [TailwindCSS](https://tailwindcss.com/)
