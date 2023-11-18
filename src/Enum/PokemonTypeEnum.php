@@ -18,4 +18,10 @@ enum PokemonTypeEnum: string
     case ひこう = 'flying';
     case エスパー = 'psychic';
     case むし = 'bug';
+    case いわ = 'rock';
+    case ゴースト = 'ghost';
+    case ドラゴン = 'dragon';
+    case あく = 'dark';
+    case はがね = 'steel';
+    case フェアリー = 'fairy';
 }
