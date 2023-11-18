@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Enum\PokemonImageEnum;
 use App\Enum\PokemonTypeEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
@@ -16,14 +17,18 @@ class SearchPokemonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('name', TextType::class, [
+                'label' => '名前',
+                'required' => false,
+            ])
             ->add('type', EnumType::class, [
-                'label' => 'ポケモンのタイプ',
+                'label' => 'タイプ',
                 'class' => PokemonTypeEnum::class,
                 'required' => false,
             ])
-            ->add('name', TextType::class, [
-                'label' => 'ポケモンの名前',
-                'required' => false,
+            ->add('image', EnumType::class, [
+                'label' => '表示画像',
+                'class' => PokemonImageEnum::class,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => '検索',

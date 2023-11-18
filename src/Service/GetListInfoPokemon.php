@@ -34,13 +34,14 @@ class GetListInfoPokemon
                 continue;
             }
 
+
             $this->listInfoPokemon
                 // ポケモンのIDを取得
                 ->addId($pokemon->getId())
                 // ポケモンの名前を取得
                 ->addName($pokemon->getName())
                 // ポケモンのデフォルト画像を取得
-                ->addImage($this->getImagePokemon->getFrontDefaultImageUrl($pokemon->getSprites()))
+                ->addImage($this->getImagePokemon->getImageUrl($pokemon->getSprites(), $data['image']))
                 // ポケモンのタイプ色を取得
                 ->addTypeColor($this->getTypePokemon->getTypeColor($pokemon->getTypes()))
             ;
