@@ -43,8 +43,18 @@ class PokeAPI extends AbstractController
     public function fetchPokemonName(string $name): Pokemon
     {
         $response = $this->client->request('GET', 'pokemon/' . $name);
-        $responseJson = json_decode($response->getBody()->getContents(), true);
+        return $this->setPokemonDto($response);
+    }
 
+    public function fetchPokemonId(int $id): Pokemon
+    {
+        $response = $this->client->request('GET', 'pokemon/' . $id);
+        return $this->setPokemonDto($response);
+    }
+
+    private function setPokemonDto($response): Pokemon
+    {
+        $responseJson = json_decode($response->getBody()->getContents(), true);
         return (new Pokemon)
             ->setId($responseJson['id'])
             ->setName($responseJson['name'])
@@ -64,12 +74,5 @@ class PokeAPI extends AbstractController
             ->setSpecies($responseJson['species'])
             ->setStats($responseJson['stats'])
             ->setTypes($responseJson['types']);
-    }
-
-    public function fetchPokemonId(int $id): array
-    {
-        $response = $this->client->request('GET', 'pokemon/' . $id);
-
-        return json_decode($response->getBody()->getContents(), true);
     }
 }
