@@ -7,6 +7,10 @@ namespace App\Controller;
 use App\Form\SearchPokemonType;
 use App\Repository\ListInfoPokemon;
 use App\Service\AddLimitPokemon;
+use App\Service\Filter\Filter;
+use App\Service\GetImagePokemon;
+use App\Service\GetTypePokemon;
+use App\Service\PokeAPI;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +23,10 @@ class SearchPokemon extends AbstractController
 
     public function __construct(
         private readonly AddLimitPokemon $addLimitPokemon,
+        private readonly PokeAPI $pokeApi,
+        private readonly GetImagePokemon $getImagePokemon,
+        private readonly GetTypePokemon $getTypePokemon,
+        private readonly Filter $filter,
     ) {
     }
 
@@ -32,8 +40,20 @@ class SearchPokemon extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            for ($i = 1; count($listInfoPokemon->getId()) < $this->limit; $i++) {
-                $listInfoPokemon = $this->addLimitPokemon->addLimitPokemon($listInfoPokemon, $data, $i);
+            if ($data['name'] !== null) {
+                $pokemon = $this->pokeApi->fetchPokemonName($data['name']);
+                $pokemon = $this->filter->filterPokemon($pokemon, $data['type']);
+                if (!is_null($pokemon)) {
+                    $listInfoPokemon
+                        ->addId($pokemon->getId())
+                        ->addName($pokemon->getName())
+                        ->addImage($this->getImagePokemon->getImageUrl($pokemon->getSprites(), $data['image']))
+                        ->addTypeColor($this->getTypePokemon->getTypeColor($pokemon->getTypes()));
+                }
+            } else {
+                for ($i = 1; count($listInfoPokemon->getId()) < $this->limit; $i++) {
+                    $listInfoPokemon = $this->addLimitPokemon->addLimitPokemon($listInfoPokemon, $data, $i);
+                }
             }
 
             if ($listInfoPokemon->getId() === []) {
