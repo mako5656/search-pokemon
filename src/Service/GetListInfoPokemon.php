@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\DTO\PokeAPI\NamedAPIResource;
 use App\Repository\ListInfoPokemon;
+use App\Service\Filter\Filter;
 
 class GetListInfoPokemon
 {

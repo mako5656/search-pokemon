@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\Filter;
 
 use App\DTO\PokeAPI\Pokemon;
 use App\Enum\PokemonTypeEnum;
+use App\Service\GetTypePokemon;
 
 class Filter
 {
