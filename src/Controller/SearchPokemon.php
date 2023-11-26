@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Form\SearchPokemonType;
 use App\Repository\ListInfoPokemon;
+use App\Service\AddLimitPokemon;
 use App\Service\GetListInfoPokemon;
 use App\Service\PokeAPI;
 use Symfony\Bridge\Twig\Attribute\Template;
@@ -16,11 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchPokemon extends AbstractController
 {
-    private int $limit = 20;
+    private int $limit = 10;
 
     public function __construct(
         private readonly PokeAPI $pokeApi,
         private readonly GetListInfoPokemon $getListInfoPokemon,
+        private readonly AddLimitPokemon $addLimitPokemon,
     ) {
     }
 
@@ -34,10 +36,13 @@ class SearchPokemon extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             // ポケモンの名前からそのポケモンの情報を取得
-            $limit = $this->limit;
-            $namedAPIResourceList = $this->pokeApi->fetchPokemon($limit);
+            $namedAPIResourceList = $this->pokeApi->fetchPokemon($this->limit);
 
             $listInfoPokemon = $this->getListInfoPokemon->resultToInfo($namedAPIResourceList->getResults(), $data);
+            $max = max($listInfoPokemon->getId());
+            for ($i = 1; count($listInfoPokemon->getId()) < $this->limit; $i++) {
+                $listInfoPokemon = $this->addLimitPokemon->addLimitPokemon($listInfoPokemon, $data, $max, $i);
+            }
 
             if ($listInfoPokemon->getId() === []) {
                 $this->addFlash('error', 'ポケモンが見つかりませんでした。');

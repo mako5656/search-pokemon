@@ -27,22 +27,16 @@ class GetListInfoPokemon
             ;
             $pokemon = $this->pokeApi->fetchPokemonName($resultPokemonList->getName());
 
-            # TODO: 配列で返すのではなく初期化されたクラスだったら次のポケモンを取得ように処理を変更する
             // 入力した項目に一致するポケモンを取得
-            [$pokemon, $isExistence] = $this->filter->filterPokemon($pokemon, $data['name'], $data['type']);
-            if (!$isExistence) {
+            $pokemon = $this->filter->filterPokemon($pokemon, $data['name'], $data['type']);
+            if (is_null($pokemon)) {
                 continue;
             }
 
-
             $this->listInfoPokemon
-                // ポケモンのIDを取得
                 ->addId($pokemon->getId())
-                // ポケモンの名前を取得
                 ->addName($pokemon->getName())
-                // ポケモンのデフォルト画像を取得
                 ->addImage($this->getImagePokemon->getImageUrl($pokemon->getSprites(), $data['image']))
-                // ポケモンのタイプ色を取得
                 ->addTypeColor($this->getTypePokemon->getTypeColor($pokemon->getTypes()))
             ;
         }
