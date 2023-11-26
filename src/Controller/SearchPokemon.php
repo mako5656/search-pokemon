@@ -35,11 +35,12 @@ class SearchPokemon extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            // ポケモンの名前からそのポケモンの情報を取得
+
             $namedAPIResourceList = $this->pokeApi->fetchPokemon($this->limit);
 
             $listInfoPokemon = $this->getListInfoPokemon->resultToInfo($namedAPIResourceList->getResults(), $data);
-            $max = max($listInfoPokemon->getId());
+
+            $max = empty($listInfoPokemon->getId()) ? 0 : max($listInfoPokemon->getId());
             for ($i = 1; count($listInfoPokemon->getId()) < $this->limit; $i++) {
                 $listInfoPokemon = $this->addLimitPokemon->addLimitPokemon($listInfoPokemon, $data, $max, $i);
             }
