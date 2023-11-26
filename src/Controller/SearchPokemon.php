@@ -7,8 +7,6 @@ namespace App\Controller;
 use App\Form\SearchPokemonType;
 use App\Repository\ListInfoPokemon;
 use App\Service\AddLimitPokemon;
-use App\Service\GetListInfoPokemon;
-use App\Service\PokeAPI;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,8 +18,6 @@ class SearchPokemon extends AbstractController
     private int $limit = 10;
 
     public function __construct(
-        private readonly PokeAPI $pokeApi,
-        private readonly GetListInfoPokemon $getListInfoPokemon,
         private readonly AddLimitPokemon $addLimitPokemon,
     ) {
     }
@@ -36,13 +32,8 @@ class SearchPokemon extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $namedAPIResourceList = $this->pokeApi->fetchPokemon($this->limit);
-
-            $listInfoPokemon = $this->getListInfoPokemon->resultToInfo($namedAPIResourceList->getResults(), $data);
-
-            $max = empty($listInfoPokemon->getId()) ? 0 : max($listInfoPokemon->getId());
             for ($i = 1; count($listInfoPokemon->getId()) < $this->limit; $i++) {
-                $listInfoPokemon = $this->addLimitPokemon->addLimitPokemon($listInfoPokemon, $data, $max, $i);
+                $listInfoPokemon = $this->addLimitPokemon->addLimitPokemon($listInfoPokemon, $data, $i);
             }
 
             if ($listInfoPokemon->getId() === []) {

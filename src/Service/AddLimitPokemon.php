@@ -17,9 +17,9 @@ class AddLimitPokemon
     ) {
     }
 
-    public function addLimitPokemon(ListInfoPokemon $listInfoPokemon, array $data, int $max, int $i): ListInfoPokemon
+    public function addLimitPokemon(ListInfoPokemon $listInfoPokemon, array $data, int $i): ListInfoPokemon
     {
-        $pokemon = $this->pokeApi->fetchPokemonId($max + $i);
+        $pokemon = $this->pokeApi->fetchPokemonId($i);
         $pokemon = $this->filter->filterPokemon($pokemon, $data['name'], $data['type']);
 
         if (!is_null($pokemon)) {
