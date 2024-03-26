@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    reviewers:
+      - "45539499"
+    labels:
+      - "アップデート対応"
+      - "php"
