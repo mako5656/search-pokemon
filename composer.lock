@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c50cc3615c835f54c207ba5a01355c9",
+    "content-hash": "7ec762457526b6dcf0fe5fa10b7339d2",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -330,6 +330,78 @@
                 }
             ],
             "time": "2024-07-18T11:15:46+00:00"
+        },
+        {
+            "name": "mako5656/openapi-generator-php-pokeapi",
+            "version": "v2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mako5656/openapi-generator-php-pokeapi.git",
+                "reference": "a6d8fc92a7a934749212c3240e81f193e47ff3b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mako5656/openapi-generator-php-pokeapi/zipball/a6d8fc92a7a934749212c3240e81f193e47ff3b2",
+                "reference": "a6d8fc92a7a934749212c3240e81f193e47ff3b2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "^7.4.5",
+                "guzzlehttp/psr7": "^2.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.5",
+                "overtrue/phplint": "^9.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "OpenAPI\\Client\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "OpenAPI\\Client\\Test\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "@phplint"
+                ],
+                "phplint": [
+                    "phplint"
+                ]
+            },
+            "license": [
+                "unlicense"
+            ],
+            "authors": [
+                {
+                    "name": "OpenAPI-Generator contributors",
+                    "homepage": "https://openapi-generator.tech"
+                }
+            ],
+            "description": "All the Pokémon data you'll ever need in one place, easily accessible through a modern free open-source RESTful API.  ## What is this?  This is a full RESTful API linked to an extensive database detailing everything about the Pokémon main game series.  We've covered everything from Pokémon to Berry Flavors.  ## Where do I start?  We have awesome [documentation](https://pokeapi.co/docs/v2) on how to use this API. It takes minutes to get started.  This API will always be publicly available and will never require any extensive setup process to consume.  Created by [**Paul Hallett**(]https://github.com/phalt) and other [**PokéAPI contributors***](https://github.com/PokeAPI/pokeapi#contributing) around the world. Pokémon and Pokémon character names are trademarks of Nintendo.",
+            "homepage": "https://openapi-generator.tech",
+            "keywords": [
+                "api",
+                "openapi",
+                "openapi-generator",
+                "openapitools",
+                "php",
+                "rest",
+                "sdk"
+            ],
+            "support": {
+                "source": "https://github.com/mako5656/openapi-generator-php-pokeapi/tree/v2.7.0",
+                "issues": "https://github.com/mako5656/openapi-generator-php-pokeapi/issues"
+            },
+            "time": "2024-12-28T07:26:19+00:00"
         },
         {
             "name": "psr/cache",
